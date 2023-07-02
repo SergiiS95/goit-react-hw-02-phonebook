@@ -1,0 +1,15 @@
+.container {
+  padding: 25px;
+}
+
+.title {
+  font-size: 40px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.titleContact {
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
