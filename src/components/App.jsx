@@ -18,19 +18,22 @@ export class App extends Component {
   };
 
   onAddContact = contactData => {
-    const finalContact = {
-      id: nanoid(3),
-      ...contactData,
-    };
-    if (
-      this.state.contacts.findIndex(
-        contact => contactData.name === contact.name
-      ) !== -1
-    ) {
+    const isExist = this.state.contacts.some(
+      contact => contactData.name.toLowerCase() === contact.name.toLowerCase()
+    );
+    if (isExist) {
       alert(`${contactData.name} is already in contacts.`);
-    } else {
-      this.setState({ contacts: [finalContact, ...this.state.contacts] });
-    }
+      return;
+    } 
+
+      const finalContact = {
+        id: nanoid(3),
+        ...contactData,
+      };
+      this.setState(prevState => ({
+        contacts: [finalContact, ...prevState.contacts],
+      }));
+    
   };
 
   handleFilter = e => {
@@ -38,9 +41,9 @@ export class App extends Component {
   };
 
   onDeleteContact = id => {
-    this.setState({
-      contacts: this.state.contacts.filter(contact => contact.id !== id),
-    });
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== id),
+    }));
   };
 
   getVisibleFilter = () => {
